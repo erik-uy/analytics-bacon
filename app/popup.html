@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- build:css styles/popup-vendor.css -->
+    <!-- bower:css -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <!--<link href="styles/main.css" rel="stylesheet">-->
+    <link href="styles/popup.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/popup-vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script src="scripts/popup.js"></script>
+
+</head>
+<body>
+<div ng-app="Popup" class="container">
+    <div ng-controller="BaconCtrl">
+        <div class="row">
+            <span class="text-center">Current Tab Id  <span class="badge">{{curTab[0].id}}</span></span>
+            <a href="" class="pull-right" ng-click="goToHelpPage()">Need Help?</a>
+
+        </div>
+      <br>
+        <div class="row">
+            <button ng-click="recordToggle()"
+                    class="col-xs-4 btn btn-default"
+                    title="{{!isRecording?'Capture a new batch of analytics beacons':'Stop capture'}}"
+            >
+              <i class="glyphicon" ng-class="{'glyphicon-record':!isRecording,'glyphicon-stop':isRecording}"></i>
+              {{!isRecording?'Record':'Stop'}}
+            </button>
+            <span class="col-xs-5 pull-right">{{'Currently ' + (isRecording?'Recording':'Stopped')}}</span>
+        </div>
+        <div class="row">
+            <button ng-click="clear()" class="col-xs-4 btn btn-default">
+                <i class="glyphicon glyphicon-trash"></i>
+                Clear Cache</button>
+            <button ng-click="diff(curTab[0].id)" class="col-xs-5 btn btn-default pull-right" ng-disabled="selectedRequestIds.length<2">
+                <i class="glyphicon glyphicon-duplicate"></i>
+                Compare Selected
+            </button>
+
+        </div>
+        <div ng-repeat="session in har" ng-init="records">
+            <h3 ng-show="records.length>0">Batch {{har.length - $index}}</h3>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="record in (records = (session|filter:{tabId:curTab[0].id}))"
+                    ng-class="{'active':selectedRequestIds.indexOf(record.requestId)>-1}">
+                    <span ng-click="toggleSelect(record.requestId)" data-toggle="tooltip" data-placement="left" title="{{record.url|decodeURIComponent}}">
+                        Request id:{{record.requestId}} - {{record.timeStamp|date:'d MMM y h:mm:ss a'}}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

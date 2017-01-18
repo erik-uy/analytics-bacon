@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <!-- build:css styles/diff-vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <!-- endbuild -->
+
+
+    <!-- build:js scripts/diff-vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/diff.js -->
+    <script src="scripts/diff.js"></script>
+    <!-- endbuild -->
+</head>
+<body>
+
+<div ng-app="Diff" class="container">
+    <br>
+    <div ng-controller="DiffCtrl">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="tabId" class=" col-form-label">Tab id:</label>
+                <select ng-model="tabId" ng-options="o as o for o in tabIds track by o" class="form-control"
+                        ng-change="updateTabUrl()">
+                    <option value="">All Tabs</option>
+                </select>
+            </div>
+            <button class="btn btn-default" ng-disabled="!tabObject" ng-click="goToTab(tabId)">Go to Tab</button>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{tabUrl}}
+                </div>
+            </div>
+        </form>
+
+        <br>
+      <h3>Captured Adobe Analytics beacons by batch</h3>
+      <span>Pick the beacons to compare</span>
+        <div class="row">
+            <div class="col-xs-2" ng-repeat="batch in har">
+                <ul class="list-group">
+                    <li class="list-group-item active"><h4>Batch {{har.length - $index}}</h4> </li>
+                    <li class="list-group-item"
+                        ng-repeat="request in batch"
+                        ng-class="{'list-group-item-success':requestIds.indexOf(request.requestId) > -1}"
+                        ng-click="toggleRequestCb(request.requestId)"
+                        ng-show="$parent.hasData = (tabId==null || tabId==request.tabId)"
+                        title="{{request.url|decodeURIComponent}}"
+                    >
+                      {{request.requestId}} - {{request.timeStamp|date:'h:mm:ss a'}}
+                    </li>
+                    <li class="list-group-item list-group-item-warning" ng-show="!hasData">
+                        No results
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+
+            <div style="overflow-x: scroll">
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th ng-repeat="h in diffData" style="min-width:150px;">
+                          {{h._requestId}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="key in diffKeys"
+                        title="{{key +( aaKeys[key].description? ' - '+ aaKeys[key].description :'' )}}"
+                        ng-class="{danger:!compareRows(key), active:aaKeys[key].volatile}"
+                        ng-show="key.indexOf('_')!==0"
+                    >
+                        <td>{{key}}</td>
+                        <td ng-repeat="h in diffData">{{diffData[$index][key]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

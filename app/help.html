@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <!-- build:css styles/help-vendor.css -->
+    <!-- bower:css -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/help-vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <title>Bacon Help Page</title>
+</head>
+<body>
+
+<!-- Add your site or application content here -->
+<div class="header">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Have some tasty Bacon <img src="images/bacon.png" alt="tasty" width="200" height="200"><br>
+        </h1>
+        <p class="lead">
+            Bacon is an inspection tool to help you troubleshoot your Adobe Analytics beacons. It keeps track of all
+            requests going to
+            Adobe's servers with which you can compare between any two (or more) network calls. Maybe you're testing out
+            a
+            fresh install and making sure it has all the attributes correctly set or have an existing implementation
+            that dropped of a field or two, this tool is for you</p>
+    </div>
+
+    <hr>
+    <div class="row marketing">
+        <h2>Popup</h2>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=""><img src="images/help/popup.PNG"/></div>
+                <br>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        Going counter-clockwise from the upper left, the current tab's chrome-assigned id is shown,
+                        followed
+                        by the Record, Cache Clear, and Compare buttons. Last is Bacon's recording status and help
+                        links.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h4>1. Start and Stop recording</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=""><img src="images/help/popup-recording.PNG"/></div>
+                <div class="panel panel-default">
+                    <div class="panel-body">Clicking on Bacon's Record button will allow you
+                        to start listening for Adobe Analytics beacons. This includes calls from ALL open windows for
+                        the
+                        current profile and all network traffic captured until you stop the recording is considered as
+                        one
+                        batch. In addition a small "R" will appear on Bacon's icon to further indicate that it's
+                        currently
+                        recording.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4>2. Select beacons to compare</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=""><img src="images/help/popup-batches.PNG"/> <img
+                        src="images/help/popup-selectandcompare.PNG"/></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">After recording a couple of beacons, you will be given the option to select
+                        the
+                        appropriate one by clicking on it. Hold your mouse over the items to give you a partially
+                        cleaned-up
+                        version of the
+                        http call to help narrow down the one you're interested in. Only the network calls made on the
+                        <code>current</code>
+                        tab will be available on this popup. More options are available when you get to the diff page.
+
+                        Click on the Compare button to confirm your selection and you'll be taken to the Diff page for
+                        further
+                        analysis.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h4>3. Clearing the cache</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">You can then clear the cache when you're done.
+                    </div>
+                </div>
+
+                <div class=""><img src="images/help/popup-clear.PNG"/></div>
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <hr>
+        <h2>Diff Page</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row"><img src="images/help/diff.PNG" width="100%"/></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        The diff page will be where you'll be spending most of your time comparing one beacon from
+                        another.
+                        The page can be roughly divided into three areas, Tab management, Beacon Selection, and Diff
+                        Table.
+                        The items selected on the popup will be selected as the defaults on this page.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+        <h4>1. Tab Management</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div><img src="images/help/diff-tabFilter.PNG" width="100%"/></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">The top section of the page is dedicated to everything related to tabs. You
+                        can
+                        select
+                        which tab id you want to filter by and the batches will only show beacons that have been
+                        executed
+                        from the selected tab.
+
+
+                        <div><img src="images/help/diff-alltabs.PNG" width="100%"/></div>
+
+
+                        The page will also perform a query to retrieve the url and page title
+                        of the page currently loaded in that tab. You can also navigate back to the tab in case you have
+                        multiple tabs open. If the tab has been closed, the page will let you know.
+                        <div><img src="images/help/diff-tabNoLongerAvailable.PNG"/></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h4>2. Beacon Selection</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=""><img src="images/help/diff-changeSelections.PNG" width="100%"/></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">The items selected from the popup is likewise selected by default but you
+                        are able to
+                        toggle
+                        the selection status of any visible item by clicking on the beacon.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <h4>3. Diff Table</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-left"><img src="images/help/diff-lists.PNG"/></div>
+                <div class=""><img src="images/help/diff-contextData.PNG"/></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">The beacons' urls will be parsed, broken down, and flattened for comparison.
+                        Lists
+                        are flattened by appending the index number to the list name, and the context values are all
+                        prefixed
+                        with <code>context_</code>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=""><img src="images/help/diff-mismatch.PNG" width="100%"/></div>
+                <div class="panel">The selected beacons will be parsed and compared against each other. Values that
+                    do not match will be flagged for review and are highlighted in red.
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class=""><img src="images/help/diff-volatile.PNG" width="100%"/></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">Certain fields like <code>timestamp</code> are marked 'volatile', colored
+                        gray,
+                        and will not be processed for comparison.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <h2>Feature Roadmap</h2>
+        <ul>
+            <li>Delete on a per Batch basis</li>
+            <li>Name Beacons and Batches</li>
+            <li>Pause script execution on Beacon send</li>
+            <li>A better help page</li>
+        </ul>
+
+        <h2>About the author</h2>
+        <p>I muck about quite often so I'm sharing the muck.</p>
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="container">
+        <p><span class="glyphicon glyphicon-piggy-bank"></span> yukire</p>
+    </div>
+</div>
+</body>
+</html>
